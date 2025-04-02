@@ -13,14 +13,9 @@
     }
     h1, h2 {
       text-align: center;
-      color: #c00000; /* Gibraltar Gaels Red */
+      color: #c00000;
     }
-    iframe {
-      display: block;
-      margin: 2rem auto;
-      border: none;
-    }
-    .payment-info {
+    .payment-info, .form-container {
       max-width: 600px;
       margin: 2rem auto;
       background: #fff;
@@ -31,6 +26,29 @@
     .payment-info a {
       color: #c00000;
       font-weight: bold;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #c00000;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 1.5rem;
+    }
+    button:hover {
+      background-color: #a00000;
     }
   </style>
 </head>
@@ -45,9 +63,97 @@
     <p>Your entry will only be valid once payment is received.</p>
   </div>
 
-  <h2>Submit Your Entry</h2>
-  <p style="text-align: center;">Please use the form below to submit your entry (you will receive a confirmation email):</p>
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSevTKIraH4S4Nng2KZTgdpHtJ8JxOmZUIo46D9fGLnpOVVHiA/viewform?embedded=true" width="100%" height="1000px">Loading…</iframe>
+  <div class="form-container">
+    <h2>Submit Your Entry</h2>
+    <form action="https://formsubmit.co/callghanshane3@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New US Masters Fundraiser Entry">
+      <input type="hidden" name="_captcha" value="false">
+      
+      <label for="name">Full Name</label>
+      <input type="text" name="name" id="name" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" name="email" id="email" required>
+
+      <label for="groupA">Group A</label>
+      <select name="groupA" id="groupA" required>
+        <option value="">-- Select a golfer --</option>
+        <option>Scottie Scheffler</option>
+        <option>Rory McIlroy</option>
+        <option>Ludvig Aberg</option>
+        <option>Jon Rahm</option>
+        <option>Collin Morikawa</option>
+        <option>Bryson DeChambeau</option>
+        <option>Xander Schauffele</option>
+        <option>Hideki Matsuyama</option>
+        <option>Justin Thomas</option>
+        <option>Tyrrell Hatton</option>
+      </select>
+
+      <label for="groupB">Group B</label>
+      <select name="groupB" id="groupB" required>
+        <option value="">-- Select a golfer --</option>
+        <option>Brooks Koepka</option>
+        <option>Patrick Cantlay</option>
+        <option>Cameron Smith</option>
+        <option>Shane Lowry</option>
+        <option>Will Zalatoris</option>
+        <option>Jordan Spieth</option>
+        <option>Viktor Hovland</option>
+        <option>Tommy Fleetwood</option>
+        <option>Joaquin Niemann</option>
+        <option>Dustin Johnson</option>
+      </select>
+
+      <label for="groupC">Group C</label>
+      <select name="groupC" id="groupC" required>
+        <option value="">-- Select a golfer --</option>
+        <option>Matt Fitzpatrick</option>
+        <option>Russell Henley</option>
+        <option>Cameron Young</option>
+        <option>Tony Finau</option>
+        <option>Sahith Theegala</option>
+        <option>Tom Kim</option>
+        <option>Wyndham Clark</option>
+        <option>Sungjae Im</option>
+        <option>Corey Conners</option>
+        <option>Max Homa</option>
+      </select>
+
+      <label for="groupD">Group D</label>
+      <select name="groupD" id="groupD" required>
+        <option value="">-- Select a golfer --</option>
+        <option>Sam Burns</option>
+        <option>Jason Day</option>
+        <option>Robert MacIntyre</option>
+        <option>Rickie Fowler</option>
+        <option>Patrick Reed</option>
+        <option>Min Woo Lee</option>
+        <option>Max Greyserman</option>
+        <option>Akshay Bhatia</option>
+        <option>Sepp Straka</option>
+        <option>Nicolai Hojgaard</option>
+      </select>
+
+      <label for="groupE">Group E</label>
+      <select name="groupE" id="groupE" required>
+        <option value="">-- Select a golfer --</option>
+        <option>Justin Rose</option>
+        <option>Davis Thompson</option>
+        <option>Maverick McNealy</option>
+        <option>Rasmus Hojgaard</option>
+        <option>Adam Scott</option>
+        <option>Si Woo Kim</option>
+        <option>Brian Harman</option>
+        <option>Billy Horschel</option>
+        <option>Thomas Detry</option>
+        <option>Nick Dunlap</option>
+      </select>
+
+      <button type="submit">Submit Entry</button>
+    <input type="hidden" name="_next" value="https://gibraltargaels.github.io/gibraltar-gaels-us-masters-V3/thank-you.html">
+</form>
+  </div>
 
   <h2>Live Leaderboard</h2>
   <iframe 
@@ -56,4 +162,37 @@
   </iframe>
 
 </body>
+
+<!-- Thank You Page (thank-you.html) -->
+<!-- Create a new file in your repo called 'thank-you.html' with the following content -->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 4rem;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #c00000;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Thank You for Your Entry!</h1>
+  <p>We appreciate your support of the Gibraltar Gaels US Masters Fundraiser.</p>
+  <p>Your picks have been recorded, and we wish you the best of luck in the competition!</p>
+</body>
+</html>
+-->
 </html>

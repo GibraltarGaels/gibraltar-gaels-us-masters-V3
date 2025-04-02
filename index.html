@@ -83,7 +83,7 @@
     <hr>
 
     <h2>Submit Your Entry</h2>
-    <form action="https://formsubmit.co/callghanshane3@gmail.com" method="POST">
+    <form id="entryForm">
       
       <input type="hidden" name="_template" value="table">
       
@@ -220,7 +220,7 @@
         <option>Daniel Berger</option>
       </select>
 
-      <input type="hidden" name="_next" value="https://gibraltargaels.github.io/gibraltar-gaels-us-masters-V3/thank-you.html">
+      
       <button type="submit">Submit Entry</button>
 </form>
   </div>
@@ -231,6 +231,28 @@
     width="100%" height="500px" style="border:1px solid #ccc;">
   </iframe>
 
+<script>
+  document.getElementById("entryForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    fetch("https://script.google.com/macros/s/AKfycbwSHJF_7iYHiAUV73KIJj30HV3vCcY6mLAkUNiHpiXySXiDwLvtMrR6AV3UG1dFfTr4yw/exec", {
+      method: "POST",
+      body: data,
+    })
+    .then(response => {
+      if (response.ok) {
+        window.location.href = "thank-you.html";
+      } else {
+        alert("There was an issue submitting your entry. Please try again later.");
+      }
+    })
+    .catch(error => {
+      console.error("Submission error:", error);
+      alert("Submission failed. Please try again later.");
+    });
+  });
+</script>
 </body>
 
 <!-- Thank You Page (thank-you.html) -->

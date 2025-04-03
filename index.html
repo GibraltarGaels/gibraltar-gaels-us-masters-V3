@@ -15,13 +15,14 @@
       text-align: center;
       color: #c00000;
     }
-    .payment-info, .form-container {
+    .payment-info, .form-container, .leaderboard-container {
       max-width: 600px;
       margin: 2rem auto;
       background: #fff;
       padding: 1.5rem;
       border: 2px solid #c00000;
-      border-radius: 10px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
     .payment-info a {
       color: #c00000;
@@ -50,21 +51,23 @@
     button:hover {
       background-color: #a00000;
     }
-
-    /* Custom Styling for the Leaderboard Container */
-    .leaderboard-container {
-      background-color: #ffffff; /* White background for a clean look */
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow around iframe */
-      overflow: hidden;
-      margin-top: 2rem;
+    .leaderboard-container h2 {
+      margin-top: 0;
+      color: #c00000;
     }
-
     .leaderboard-iframe {
-      border-radius: 8px; /* Rounded corners for the iframe */
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.2); /* Subtle shadow effect for the iframe */
-      border: none; /* Remove default border */
+      border-radius: 12px;
+      border: none;
+      width: 100%;
+      height: 500px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    }
+    .leaderboard-header {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #c00000;
+      margin-bottom: 1rem;
     }
   </style>
 </head>
@@ -73,152 +76,30 @@
   <h1>Gibraltar Gaels US Masters Fundraiser</h1>
 
   <div class="payment-info">
-    <h2>Payment Info</h2>
-    <p>The entry fee is <strong>€10</strong>. Please send payment to:</p>
-    <p><strong>Revolut:</strong> <a href="https://revolut.me/killiavb3" target="_blank">https://revolut.me/killiavb3</a></p>
-    <p>Your entry will only be valid once payment is received.</p>
+    <h2>How to Enter</h2>
+    <ol>
+      <li>
+        <strong>Pay the €10 entry fee</strong> via Revolut using the link below:
+        <div style="text-align: center; font-size: 1.2rem; font-weight: bold; margin: 1rem 0;">
+          <a href="https://revolut.me/killiavb3" target="_blank">💸 revolut.me/killiavb3</a>
+        </div>
+        <p><strong>Important:</strong> When sending payment, add a note with your <u>Full Name</u> and the word <u>“Masters”</u> so Killian knows who the entry is from.</p>
+        <p><em>Example: “John Smith - Masters”</em></p>
+      </li>
+      <li>
+        <strong>Submit your picks using the entry form below.</strong>
+      </li>
+    </ol>
+    <p style="margin-top: 1rem;"><em>Your entry will only be valid once payment is confirmed.</em></p>
   </div>
 
-  <div class="form-container">
-    <h2>How It Works</h2>
-    <p><strong>1.</strong> Choose <strong>one golfer from each of the five groups</strong> below.</p>
-    <p><strong>2.</strong> Your golfers will earn points based on their performance:</p>
-    <ul>
-      <li>1st in group: 5 points</li>
-      <li>2nd in group: 4 points</li>
-      <li>3rd in group: 3 points</li>
-      <li>4th in group: 2 points</li>
-      <li>5th in group: 1 point</li>
-      <li>Missed cut: -1 point</li>
-    </ul>
-    <p><strong>3.</strong> Bonus Points:</p>
-    <ul>
-      <li>+5 points if you correctly predict the tournament winner</li>
-      <li>+2 points if your golfer is the tournament leader at the end of Round 1, Round 2, or Round 3</li>
-    </ul>
-    <p><strong>4.</strong> Tiebreaker Rules (Dead Heat Scoring):</p>
-    <p>If players tie for a position in a group, the points for the tied positions are added together and divided equally among them.</p>
-    <p><em>Example:</em> If 3 players tie for 2nd place, the points for 2nd (4), 3rd (3), and 4th (2) are added (total 9) and divided by 3 — each tied player earns 3 points.</p>
-    <p><strong>Total points on offer per group = 15</strong> (5 + 4 + 3 + 2 + 1)</p>
-    <p><strong>5.</strong> Entry is <strong>€10</strong>. Winner takes all — ties split the prize.</p>
-    <p><strong>6.</strong> Submit your payment via Revolut: <a href="https://revolut.me/killiavb3" target="_blank">revolut.me/killiavb3</a></p>
-    <hr>
-
-    <h2>Submit Your Entry</h2>
-    <form id="entryForm">
-      <label for="name">Full Name</label>
-      <input type="text" name="name" id="name" required>
-
-      <label for="email">Email Address</label>
-      <input type="email" name="email" id="email" required>
-
-      <label for="groupA">Group A</label>
-      <select name="groupA" id="groupA" required>
-        <option value="">-- Select a golfer --</option>
-        <option>Scottie Scheffler</option>
-        <option>Rory McIlroy</option>
-        <option>Ludvig Aberg</option>
-        <option>Jon Rahm</option>
-        <option>Collin Morikawa</option>
-        <option>Bryson DeChambeau</option>
-        <option>Xander Schauffele</option>
-        <option>Hideki Matsuyama</option>
-        <option>Justin Thomas</option>
-        <option>Tyrrell Hatton</option>
-      </select>
-
-      <label for="groupB">Group B</label>
-      <select name="groupB" id="groupB" required>
-        <option value="">-- Select a golfer --</option>
-        <option>Brooks Koepka</option>
-        <option>Patrick Cantlay</option>
-        <option>Cameron Smith</option>
-        <option>Shane Lowry</option>
-        <option>Will Zalatoris</option>
-        <option>Jordan Spieth</option>
-        <option>Viktor Hovland</option>
-        <option>Tommy Fleetwood</option>
-        <option>Joaquin Niemann</option>
-        <option>Dustin Johnson</option>
-      </select>
-
-      <label for="groupC">Group C</label>
-      <select name="groupC" id="groupC" required>
-        <option value="">-- Select a golfer --</option>
-        <option>Matt Fitzpatrick</option>
-        <option>Russell Henley</option>
-        <option>Cameron Young</option>
-        <option>Tony Finau</option>
-        <option>Sahith Theegala</option>
-        <option>Tom Kim</option>
-        <option>Wyndham Clark</option>
-        <option>Sungjae Im</option>
-        <option>Corey Conners</option>
-        <option>Max Homa</option>
-      </select>
-
-      <label for="groupD">Group D</label>
-      <select name="groupD" id="groupD" required>
-        <option value="">-- Select a golfer --</option>
-        <option>Sam Burns</option>
-        <option>Jason Day</option>
-        <option>Robert MacIntyre</option>
-        <option>Rickie Fowler</option>
-        <option>Patrick Reed</option>
-        <option>Min Woo Lee</option>
-        <option>Max Greyserman</option>
-        <option>Akshay Bhatia</option>
-        <option>Sepp Straka</option>
-        <option>Nicolai Hojgaard</option>
-      </select>
-
-      <label for="groupE">Group E</label>
-      <select name="groupE" id="groupE" required>
-        <option value="">-- Select a golfer --</option>
-        <option>Justin Rose</option>
-        <option>Davis Thompson</option>
-        <option>Maverick McNealy</option>
-        <option>Rasmus Hojgaard</option>
-        <option>Adam Scott</option>
-        <option>Si Woo Kim</option>
-        <option>Brian Harman</option>
-        <option>Billy Horschel</option>
-        <option>Thomas Detry</option>
-        <option>Nick Dunlap</option>
-        <option>Thriston Lawrence</option>
-        <option>Keegan Bradley</option>
-        <option>Byeong Hun An</option>
-        <option>Taylor Pendrith</option>
-        <option>Cameron Davis</option>
-        <option>Harris English</option>
-        <option>Christiaan Bezuidenhout</option>
-        <option>Thorbjorn Olesen</option>
-        <option>Ryan Fox</option>
-        <option>Kurt Kitayama</option>
-        <option>Sergio Garcia</option>
-        <option>Erik van Rooyen</option>
-        <option>Nick Taylor</option>
-        <option>J.T. Poston</option>
-        <option>Eric Cole</option>
-        <option>Austin Eckroat</option>
-        <option>Phil Mickelson</option>
-        <option>Chris Kirk</option>
-        <option>Alex Noren</option>
-        <option>Lucas Glover</option>
-        <option>Adrian Meronk</option>
-        <option>Seamus Power</option>
-        <option>Denny McCarthy</option>
-        <option>Matthieu Pavon</option>
-        <option>Jhonattan Vegas</option>
-        <option>Nico Echavarria</option>
-      </select>
-
-      <button type="submit">Submit Entry</button>
-    </form>
-  </div>
-
-  <h2>Live Leaderboard</h2>
   <div class="leaderboard-container">
-    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR5k0KDU82aiZZxwBnEqzbmxH0LculvLuSaL_BY7b30YKdsItZk20kaLUN0R3_Mg6v2F9Wrk7PskHLq/pubhtml?gid=722914475&single=true&widget=true&headers=false" class="leaderboard-iframe" width="100%" height="500px" style="border: none;"></iframe>
+    <div class="leaderboard-header">Live Leaderboard</div>
+    <iframe 
+      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR5k0KDU82aiZZxwBnEqzbmxH0LculvLuSaL_BY7b30YKdsItZk20kaLUN0R3_Mg6v2F9Wrk7PskHLq/pubhtml?gid=722914475&single=true&widget=true&headers=false" 
+      class="leaderboard-iframe">
+    </iframe>
+  </div>
 
-</div> <script> document.getElementById("entryForm").addEventListener("submit", function(e) { e.preventDefault(); const form = e.target; const data = new FormData(form); fetch("https://script.google.com/macros/s/AKfycbw69QbqrzYKseXts-TdZDlBY46fB-tLIjdIKguPbWMBSQ64tLJemKHIiJyKAYRbG-9omw/exec", { method: "POST", body: data, }) .then(response => { if (response.ok) { window.location.href = "thank-you.html"; } else { alert("There was an issue submitting your entry. Please try again later."); } }) .catch(error => { console.error("Submission error:", error); alert("Submission failed. Please try again later."); }); }); </script> </body> </html> ```
+</body>
+</html>

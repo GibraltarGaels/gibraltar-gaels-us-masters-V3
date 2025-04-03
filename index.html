@@ -50,6 +50,22 @@
     button:hover {
       background-color: #a00000;
     }
+
+    /* Custom Styling for the Leaderboard Container */
+    .leaderboard-container {
+      background-color: #ffffff; /* White background for a clean look */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow around iframe */
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+
+    .leaderboard-iframe {
+      border-radius: 8px; /* Rounded corners for the iframe */
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.2); /* Subtle shadow effect for the iframe */
+      border: none; /* Remove default border */
+    }
   </style>
 </head>
 <body>
@@ -202,31 +218,7 @@
   </div>
 
   <h2>Live Leaderboard</h2>
-  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR5k0KDU82aiZZxwBnEqzbmxH0LculvLuSaL_BY7b30YKdsItZk20kaLUN0R3_Mg6v2F9Wrk7PskHLq/pubhtml?gid=722914475&amp;single=true&amp;widget=true&amp;headers=false"
-    width="100%" height="500px" style="border:1px solid #ccc;">
-  </iframe>
+  <div class="leaderboard-container">
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR5k0KDU82aiZZxwBnEqzbmxH0LculvLuSaL_BY7b30YKdsItZk20kaLUN0R3_Mg6v2F9Wrk7PskHLq/pubhtml?gid=722914475&single=true&widget=true&headers=false" class="leaderboard-iframe" width="100%" height="500px" style="border: none;"></iframe>
 
-<script>
-  document.getElementById("entryForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const form = e.target;
-    const data = new FormData(form);
-    fetch("https://script.google.com/macros/s/AKfycbw69QbqrzYKseXts-TdZDlBY46fB-tLIjdIKguPbWMBSQ64tLJemKHIiJyKAYRbG-9omw/exec", {
-      method: "POST",
-      body: data,
-    })
-    .then(response => {
-      if (response.ok) {
-        window.location.href = "thank-you.html";
-      } else {
-        alert("There was an issue submitting your entry. Please try again later.");
-      }
-    })
-    .catch(error => {
-      console.error("Submission error:", error);
-      alert("Submission failed. Please try again later.");
-    });
-  });
-</script>
-</body>
-</html>
+</div> <script> document.getElementById("entryForm").addEventListener("submit", function(e) { e.preventDefault(); const form = e.target; const data = new FormData(form); fetch("https://script.google.com/macros/s/AKfycbw69QbqrzYKseXts-TdZDlBY46fB-tLIjdIKguPbWMBSQ64tLJemKHIiJyKAYRbG-9omw/exec", { method: "POST", body: data, }) .then(response => { if (response.ok) { window.location.href = "thank-you.html"; } else { alert("There was an issue submitting your entry. Please try again later."); } }) .catch(error => { console.error("Submission error:", error); alert("Submission failed. Please try again later."); }); }); </script> </body> </html> ```

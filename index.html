@@ -267,8 +267,8 @@
     const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR5k0KDU82aiZZxwBnEqzbmxH0LculvLuSaL_BY7b30YKdsItZk20kaLUN0R3_Mg6v2F9Wrk7PskHLq/pub?gid=722914475&single=true&output=csv';
     const response = await fetch(url);
     const data = await response.text();
-    const rows = data.trim().split('
-').map(row => row.split(','));
+  const rows = data.trim().split('\n').map(row => row.split(','));
+
 
     let html = '<table style="width:100%; border-collapse:collapse; text-align:left;">';
     html += '<thead><tr style="background-color:#c00000; color:white;">'

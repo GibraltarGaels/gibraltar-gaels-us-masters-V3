@@ -297,16 +297,16 @@
 
     for (let i = 1; i < rows.length; i++) {
       const row = rows[i];
-      if (row.length < 8) continue;
-      const [rank, name, a, b, c, d, e, total] = row;
+      if (row.length < 12) continue;
+      const [name, a, b, c, d, e,,,,,, total] = row;
       let medal = '';
       if (i === 1) medal = '🥇';
       else if (i === 2) medal = '🥈';
       else if (i === 3) medal = '🥉';
 
       html += `<tr style="background-color:${i % 2 === 0 ? '#fff' : '#f5f5f5'};">
-        <td style="padding:10px; font-weight:bold;">${rank}</td>
-        <td style="padding:10px; font-weight:bold;">${medal} ${name}</td>
+        <td style="padding:10px; font-weight:bold;">${i}</td>
+        <td style="padding:10px; font-weight:bold;">${i === 1 ? '🥇' : i === 2 ? '🥈' : i === 3 ? '🥉' : ''} ${name}</td>
         <td style="padding:10px;">${a}</td>
         <td style="padding:10px;">${b}</td>
         <td style="padding:10px;">${c}</td>
@@ -332,6 +332,7 @@
     window.leaderboardLoaded = true;
   }
 }
+  showTab('entry');
 </script>
 </body>
 </html>

@@ -314,13 +314,18 @@
     document.getElementById('customLeaderboard').innerHTML = html;
   }
 
-  loadLeaderboard();
+  
 </script>
 <script>
   function showTab(tab) {
-    document.getElementById('entryTab').style.display = tab === 'entry' ? 'block' : 'none';
-    document.getElementById('leaderboardTab').style.display = tab === 'leaderboard' ? 'block' : 'none';
+  document.getElementById('entryTab').style.display = tab === 'entry' ? 'block' : 'none';
+  document.getElementById('leaderboardTab').style.display = tab === 'leaderboard' ? 'block' : 'none';
+  
+  if (tab === 'leaderboard' && !window.leaderboardLoaded) {
+    loadLeaderboard();
+    window.leaderboardLoaded = true;
   }
+}
 </script>
 </body>
 </html>

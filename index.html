@@ -271,6 +271,7 @@
   </script>
 
 <script>
+  window.leaderboardLoaded = false;
   async function loadLeaderboard() {
     const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR5k0KDU82aiZZxwBnEqzbmxH0LculvLuSaL_BY7b30YKdsItZk20kaLUN0R3_Mg6v2F9Wrk7PskHLq/pub?gid=722914475&single=true&output=csv';
     const response = await fetch(url);
@@ -292,7 +293,9 @@
     html += '<tbody>';
 
     for (let i = 1; i < rows.length; i++) {
-      const [rank, name, a, b, c, d, e, total] = rows[i];
+      const row = rows[i];
+      if (row.length < 8) continue;
+      const [rank, name, a, b, c, d, e, total] = row;
       let medal = '';
       if (i === 1) medal = '🥇';
       else if (i === 2) medal = '🥈';

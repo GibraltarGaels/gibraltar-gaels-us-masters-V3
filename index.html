@@ -263,41 +263,50 @@
   </script>
 
 <script>
-    async function loadLeaderboard() {
-      const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR5k0KDU82aiZZxwBnEqzbmxH0LculvLuSaL_BY7b30YKdsItZk20kaLUN0R3_Mg6v2F9Wrk7PskHLq/pub?gid=722914475&single=true&output=csv';
-      const response = await fetch(url);
-      const data = await response.text();
-      const rows = data.trim().split('
-').map(row => row.split(','));.map(row => row.split(','));
+  async function loadLeaderboard() {
+    const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR5k0KDU82aiZZxwBnEqzbmxH0LculvLuSaL_BY7b30YKdsItZk20kaLUN0R3_Mg6v2F9Wrk7PskHLq/pub?gid=722914475&single=true&output=csv';
+    const response = await fetch(url);
+    const data = await response.text();
+    const rows = data.trim().split('
+').map(row => row.split(','));
 
-      let html = '<table style="width:100%; border-collapse:collapse; text-align:left;">';
-      html += '<thead><tr style="background-color:#c00000; color:white;"><th style="padding:10px;">Rank</th><th style="padding:10px;">Name</th><th style="padding:10px;">Points</th></tr></thead>';
-      html += '<tbody>';
+    let html = '<table style="width:100%; border-collapse:collapse; text-align:left;">';
+    html += '<thead><tr style="background-color:#c00000; color:white;">'
+          + '<th style="padding:10px;">Rank</th>'
+          + '<th style="padding:10px;">Name</th>'
+          + '<th style="padding:10px;">Group A</th>'
+          + '<th style="padding:10px;">Group B</th>'
+          + '<th style="padding:10px;">Group C</th>'
+          + '<th style="padding:10px;">Group D</th>'
+          + '<th style="padding:10px;">Group E</th>'
+          + '<th style="padding:10px;">Total</th>'
+          + '</tr></thead>';
+    html += '<tbody>';
 
-      for (let i = 1; i < rows.length; i++) {
-  const [rank, name, points] = rows[i];
-  let medal = '';
-  if (i === 1) medal = '🥇';
-  else if (i === 2) medal = '🥈';
-  else if (i === 3) medal = '🥉';
+    for (let i = 1; i < rows.length; i++) {
+      const [rank, name, a, b, c, d, e, total] = rows[i];
+      let medal = '';
+      if (i === 1) medal = '🥇';
+      else if (i === 2) medal = '🥈';
+      else if (i === 3) medal = '🥉';
 
-  html += `<tr style="background-color:${i % 2 === 0 ? '#fff' : '#f5f5f5'};">
-    <td style="padding:10px; font-weight:bold;">${rank}</td>
-    <td style="padding:10px; font-weight:bold;">${medal} ${name}</td>
-    <td style="padding:10px;">${points}</td>
-  </tr>`;
-};">
-          <td style="padding:10px;">${rank}</td>
-          <td style="padding:10px; font-weight:bold;">${name}</td>
-          <td style="padding:10px;">${points}</td>
-        </tr>`;
-      }
-
-      html += '</tbody></table>';
-      document.getElementById('customLeaderboard').innerHTML = html;
+      html += `<tr style="background-color:${i % 2 === 0 ? '#fff' : '#f5f5f5'};">
+        <td style="padding:10px; font-weight:bold;">${rank}</td>
+        <td style="padding:10px; font-weight:bold;">${medal} ${name}</td>
+        <td style="padding:10px;">${a}</td>
+        <td style="padding:10px;">${b}</td>
+        <td style="padding:10px;">${c}</td>
+        <td style="padding:10px;">${d}</td>
+        <td style="padding:10px;">${e}</td>
+        <td style="padding:10px; font-weight:bold;">${total}</td>
+      </tr>`;
     }
 
-    loadLeaderboard();
-  </script>
+    html += '</tbody></table>';
+    document.getElementById('customLeaderboard').innerHTML = html;
+  }
+
+  loadLeaderboard();
+</script>
 </body>
 </html>

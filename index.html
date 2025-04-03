@@ -93,6 +93,120 @@
     <p style="margin-top: 1rem;"><em>Your entry will only be valid once payment is confirmed.</em></p>
   </div>
 
+  <div class="form-container">
+    <h2>Submit Your Entry</h2>
+    <form id="entryForm">
+      <label for="name">Full Name</label>
+      <input type="text" name="name" id="name" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" name="email" id="email" required>
+
+      <label for="groupA">Group A</label>
+      <select name="groupA" id="groupA" required>
+        <option value="">-- Select a golfer --</option>
+        <option>Scottie Scheffler</option>
+        <option>Rory McIlroy</option>
+        <option>Ludvig Aberg</option>
+        <option>Jon Rahm</option>
+        <option>Collin Morikawa</option>
+        <option>Bryson DeChambeau</option>
+        <option>Xander Schauffele</option>
+        <option>Hideki Matsuyama</option>
+        <option>Justin Thomas</option>
+        <option>Tyrrell Hatton</option>
+      </select>
+
+      <label for="groupB">Group B</label>
+      <select name="groupB" id="groupB" required>
+        <option value="">-- Select a golfer --</option>
+        <option>Brooks Koepka</option>
+        <option>Patrick Cantlay</option>
+        <option>Cameron Smith</option>
+        <option>Shane Lowry</option>
+        <option>Will Zalatoris</option>
+        <option>Jordan Spieth</option>
+        <option>Viktor Hovland</option>
+        <option>Tommy Fleetwood</option>
+        <option>Joaquin Niemann</option>
+        <option>Dustin Johnson</option>
+      </select>
+
+      <label for="groupC">Group C</label>
+      <select name="groupC" id="groupC" required>
+        <option value="">-- Select a golfer --</option>
+        <option>Matt Fitzpatrick</option>
+        <option>Russell Henley</option>
+        <option>Cameron Young</option>
+        <option>Tony Finau</option>
+        <option>Sahith Theegala</option>
+        <option>Tom Kim</option>
+        <option>Wyndham Clark</option>
+        <option>Sungjae Im</option>
+        <option>Corey Conners</option>
+        <option>Max Homa</option>
+      </select>
+
+      <label for="groupD">Group D</label>
+      <select name="groupD" id="groupD" required>
+        <option value="">-- Select a golfer --</option>
+        <option>Sam Burns</option>
+        <option>Jason Day</option>
+        <option>Robert MacIntyre</option>
+        <option>Rickie Fowler</option>
+        <option>Patrick Reed</option>
+        <option>Min Woo Lee</option>
+        <option>Max Greyserman</option>
+        <option>Akshay Bhatia</option>
+        <option>Sepp Straka</option>
+        <option>Nicolai Hojgaard</option>
+      </select>
+
+      <label for="groupE">Group E</label>
+      <select name="groupE" id="groupE" required>
+        <option value="">-- Select a golfer --</option>
+        <option>Justin Rose</option>
+        <option>Davis Thompson</option>
+        <option>Maverick McNealy</option>
+        <option>Rasmus Hojgaard</option>
+        <option>Adam Scott</option>
+        <option>Si Woo Kim</option>
+        <option>Brian Harman</option>
+        <option>Billy Horschel</option>
+        <option>Thomas Detry</option>
+        <option>Nick Dunlap</option>
+        <option>Thriston Lawrence</option>
+        <option>Keegan Bradley</option>
+        <option>Byeong Hun An</option>
+        <option>Taylor Pendrith</option>
+        <option>Cameron Davis</option>
+        <option>Harris English</option>
+        <option>Christiaan Bezuidenhout</option>
+        <option>Thorbjorn Olesen</option>
+        <option>Ryan Fox</option>
+        <option>Kurt Kitayama</option>
+        <option>Sergio Garcia</option>
+        <option>Erik van Rooyen</option>
+        <option>Nick Taylor</option>
+        <option>J.T. Poston</option>
+        <option>Eric Cole</option>
+        <option>Austin Eckroat</option>
+        <option>Phil Mickelson</option>
+        <option>Chris Kirk</option>
+        <option>Alex Noren</option>
+        <option>Lucas Glover</option>
+        <option>Adrian Meronk</option>
+        <option>Seamus Power</option>
+        <option>Denny McCarthy</option>
+        <option>Matthieu Pavon</option>
+        <option>Jhonattan Vegas</option>
+        <option>Nico Echavarria</option>
+      </select>
+
+      <button type="submit">Submit Entry</button>
+    </form>
+  </div>
+
   <div class="leaderboard-container">
     <div class="leaderboard-header">Live Leaderboard</div>
     <iframe 
@@ -100,6 +214,29 @@
       class="leaderboard-iframe">
     </iframe>
   </div>
+
+  <script>
+    document.getElementById("entryForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      fetch("https://script.google.com/macros/s/AKfycbw69QbqrzYKseXts-TdZDlBY46fB-tLIjdIKguPbWMBSQ64tLJemKHIiJyKAYRbG-9omw/exec", {
+        method: "POST",
+        body: data,
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = "thank-you.html";
+        } else {
+          alert("There was an issue submitting your entry. Please try again later.");
+        }
+      })
+      .catch(error => {
+        console.error("Submission error:", error);
+        alert("Submission failed. Please try again later.");
+      });
+    });
+  </script>
 
 </body>
 </html>

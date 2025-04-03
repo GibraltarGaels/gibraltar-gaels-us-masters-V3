@@ -72,6 +72,12 @@
   </style>
 </head>
 <body>
+  <nav style="text-align:center; margin-bottom: 2rem;">
+    <button onclick="showTab('entry')" style="margin: 0 1rem; padding: 0.5rem 1rem; font-size: 1rem; background-color: #c00000; color: white; border: none; border-radius: 5px; cursor: pointer;">To Enter</button>
+    <button onclick="showTab('leaderboard')" style="margin: 0 1rem; padding: 0.5rem 1rem; font-size: 1rem; background-color: #c00000; color: white; border: none; border-radius: 5px; cursor: pointer;">Leaderboard</button>
+  </nav>
+
+  <div id="entryTab">
 
   <h1>Gibraltar Gaels US Masters Fundraiser</h1>
 
@@ -232,10 +238,12 @@
     </form>
   </div>
 
+  <div id="leaderboardTab" style="display:none;">
   <div class="leaderboard-container">
     <div class="leaderboard-header">Live Leaderboard</div>
     <div id="customLeaderboard" class="leaderboard-table"></div>
   </div>
+</div>
     
   </div>
 
@@ -307,6 +315,12 @@
   }
 
   loadLeaderboard();
+</script>
+<script>
+  function showTab(tab) {
+    document.getElementById('entryTab').style.display = tab === 'entry' ? 'block' : 'none';
+    document.getElementById('leaderboardTab').style.display = tab === 'leaderboard' ? 'block' : 'none';
+  }
 </script>
 </body>
 </html>

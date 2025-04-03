@@ -282,7 +282,7 @@
   const rows = data.trim().split('\n').map(row => row.split(','));
 
 
-    let html = '<table style="width:100%; border-collapse:collapse; text-align:left;">';
+    let html = '<div style="overflow-x:auto;"><table style="min-width:850px; width:100%; border-collapse:collapse; text-align:left;">';
     html += '<thead><tr style="background-color:#c00000; color:white;">'
           + '<th style="padding:10px;">Rank</th>'
           + '<th style="padding:10px;">Name</th>'
@@ -295,16 +295,27 @@
           + '</tr></thead>';
     html += '<tbody>';
 
-    for (let i = 1; i < rows.length; i++) {
-      const row = rows[i];
-      if (row.length < 12) continue;
-      const [name, a, b, c, d, e,,,,,, total] = row;
+    const dataRows = rows.slice(1).filter(row => row.length >= 12);
+    dataRows.sort((a, b) => parseInt(b[11] || 0) - parseInt(a[11] || 0));
+
+    for (let i = 0; i < dataRows.length; i++) {
+      const [name, a, b, c, d, e,,,,,, total] = dataRows[i];
       let medal = '';
-      if (i === 1) medal = '🥇';
-      else if (i === 2) medal = '🥈';
-      else if (i === 3) medal = '🥉';
+      if (i === 0) medal = '🥇';
+      else if (i === 1) medal = '🥈';
+      else if (i === 2) medal = '🥉';
 
       html += `<tr style="background-color:${i % 2 === 0 ? '#fff' : '#f5f5f5'};">
+        <td style="padding:10px; font-weight:bold;">${i + 1}</td>
+        <td style="padding:10px; font-weight:bold;">${medal} ${name}</td>
+        <td style="padding:10px;">${a}</td>
+        <td style="padding:10px;">${b}</td>
+        <td style="padding:10px;">${c}</td>
+        <td style="padding:10px;">${d}</td>
+        <td style="padding:10px;">${e}</td>
+        <td style="padding:10px; font-weight:bold;">${total}</td>
+      </tr>`;
+    };">
         <td style="padding:10px; font-weight:bold;">${i}</td>
         <td style="padding:10px; font-weight:bold;">${i === 1 ? '🥇' : i === 2 ? '🥈' : i === 3 ? '🥉' : ''} ${name}</td>
         <td style="padding:10px;">${a}</td>
@@ -316,7 +327,7 @@
       </tr>`;
     }
 
-    html += '</tbody></table>';
+    html += '</tbody></table></div>';
     document.getElementById('customLeaderboard').innerHTML = html;
   }
 

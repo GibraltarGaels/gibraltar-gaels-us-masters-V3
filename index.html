@@ -341,79 +341,77 @@
 </script>
 <script>
   function showTab(tab) {
-  const entryTab = document.getElementById('entryTab');
-  const leaderboardTab = document.getElementById('leaderboardTab');
+    const entryTab = document.getElementById('entryTab');
+    const leaderboardTab = document.getElementById('leaderboardTab');
 
-  entryTab.style.opacity = 0;
-  leaderboardTab.style.opacity = 0;
-
-  setTimeout(() => {
-    entryTab.style.display = tab === 'entry' ? 'block' : 'none';
-    leaderboardTab.style.display = tab === 'leaderboard' ? 'block' : 'none';
+    entryTab.style.opacity = 0;
+    leaderboardTab.style.opacity = 0;
 
     setTimeout(() => {
-      if (tab === 'entry') {
-        entryTab.style.opacity = 1;
-      } else {
-        leaderboardTab.style.opacity = 1;
+      entryTab.style.display = tab === 'entry' ? 'block' : 'none';
+      leaderboardTab.style.display = tab === 'leaderboard' ? 'block' : 'none';
+
+      setTimeout(() => {
+        if (tab === 'entry') {
+          entryTab.style.opacity = 1;
+        } else {
+          leaderboardTab.style.opacity = 1;
+          if (!window.leaderboardLoaded) {
+            loadLeaderboard();
+            window.leaderboardLoaded = true;
+          }
+        }
+      }, 50);
+    }, 200);
+  }
+
+  // Countdown control
+  const deadline = new Date("April 10, 2025 13:00:00 GMT+0100");
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const countdownEl = document.getElementById("countdown");
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const t = deadline - now;
+
+      if (t <= 0 && !window.countdownFinished) {
+        window.countdownFinished = true;
+        countdownEl.innerHTML = "✅ Entries are now closed.";
+        document.getElementById("entryTab").style.display = "none";
+        document.querySelector("button[onclick=\"showTab('entry')\"]").style.display = "none";
         if (!window.leaderboardLoaded) {
           loadLeaderboard();
           window.leaderboardLoaded = true;
         }
+        showTab('leaderboard');
+        return;
       }
-    }, 50);
-  }, 200);
-}
-// Countdown control
-const deadline = new Date("April 10, 2025 13:00:00 GMT+0100");
-const now = new Date().getTime();
-const entryOpen = now < deadline;
 
-const countdownEl = document.getElementById("countdown");
-function updateCountdown() {
-  const now = new Date().getTime();
-  const t = deadline - now;
-  if (t <= 0 && !window.countdownFinished) {
-    window.countdownFinished = true;
-    countdownEl.innerHTML = "✅ Entries are now closed.";
-    document.getElementById("entryTab").style.display = "none";
-    document.querySelector("button[onclick=\"showTab('entry')\"]").style.display = "none";
-    if (!window.leaderboardLoaded) {
-      loadLeaderboard();
-      window.leaderboardLoaded = true;
+      const days = Math.floor(t / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((t % (1000 * 60)) / 1000);
+      countdownEl.innerHTML = `⏳ Entries close in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
-    showTab('leaderboard');
-    return;
-  }
-  const days = Math.floor(t / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((t % (1000 * 60)) / 1000);
-  countdownEl.innerHTML = `⏳ Entries close in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-}
-  }
-  const days = Math.floor(t / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((t % (1000 * 60)) / 1000);
-  countdownEl.innerHTML = `⏳ Entries close in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-}
-document.addEventListener("DOMContentLoaded", function () {
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
 
-  if (entryOpen) {
-    showTab('entry');
-  } else {
-    document.getElementById("entryTab").style.display = "none";
-    document.querySelector("button[onclick=\"showTab('entry')\"]").style.display = "none";
-    showTab('leaderboard');
-  }
-}); else {
-  document.getElementById("entryTab").style.display = "none";
-  document.querySelector("button[onclick=\"showTab('entry')\"]").style.display = "none";
-  showTab('leaderboard');
-}
+    window.leaderboardLoaded = false;
+    window.countdownFinished = false;
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    const now = new Date().getTime();
+    const entryOpen = now < deadline;
+
+    if (entryOpen) {
+      showTab('entry');
+    } else {
+      document.getElementById("entryTab").style.display = "none";
+      document.querySelector("button[onclick=\"showTab('entry')\"]").style.display = "none";
+      showTab('leaderboard');
+    }
+  });
 </script>
 </body>
 </html>

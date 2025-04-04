@@ -383,7 +383,6 @@ function updateCountdown() {
       window.leaderboardLoaded = true;
     }
     showTab('leaderboard');
-    }
     return;
   }
   const days = Math.floor(t / (1000 * 60 * 60 * 24));
@@ -392,12 +391,25 @@ function updateCountdown() {
   const seconds = Math.floor((t % (1000 * 60)) / 1000);
   countdownEl.innerHTML = `⏳ Entries close in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
 }
-setInterval(updateCountdown, 1000);
-updateCountdown();
+  }
+  const days = Math.floor(t / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((t % (1000 * 60)) / 1000);
+  countdownEl.innerHTML = `⏳ Entries close in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+document.addEventListener("DOMContentLoaded", function () {
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
 
-if (entryOpen) {
-  showTab('entry');
-} else {
+  if (entryOpen) {
+    showTab('entry');
+  } else {
+    document.getElementById("entryTab").style.display = "none";
+    document.querySelector("button[onclick=\"showTab('entry')\"]").style.display = "none";
+    showTab('leaderboard');
+  }
+}); else {
   document.getElementById("entryTab").style.display = "none";
   document.querySelector("button[onclick=\"showTab('entry')\"]").style.display = "none";
   showTab('leaderboard');

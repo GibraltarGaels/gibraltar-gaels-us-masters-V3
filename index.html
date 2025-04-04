@@ -365,7 +365,7 @@
   }, 200);
 }
 // Countdown control
-const deadline = new Date(new Date().getTime() + 30 * 1000);
+const deadline = new Date("April 10, 2025 13:00:00 GMT+0100");
 const now = new Date().getTime();
 const entryOpen = now < deadline;
 
@@ -373,14 +373,16 @@ const countdownEl = document.getElementById("countdown");
 function updateCountdown() {
   const now = new Date().getTime();
   const t = deadline - now;
-  if (t <= 0) {
+  if (t <= 0 && !window.countdownFinished) {
+    window.countdownFinished = true;
     countdownEl.innerHTML = "✅ Entries are now closed.";
     document.getElementById("entryTab").style.display = "none";
     document.querySelector("button[onclick=\"showTab('entry')\"]").style.display = "none";
     if (!window.leaderboardLoaded) {
       loadLeaderboard();
       window.leaderboardLoaded = true;
-      showTab('leaderboard');
+    }
+    showTab('leaderboard');
     }
     return;
   }

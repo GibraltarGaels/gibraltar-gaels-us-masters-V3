@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gibraltar Gaels US Masters Fundraiser</title>
   <style>
+    #entryTab, #leaderboardTab {
+      transition: opacity 0.4s ease;
+    }
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -240,6 +243,7 @@
 
   </div>
 
+<div style="height: 3rem;"></div>
 <div id="leaderboardTab" style="display:none;">
   <div class="leaderboard-container">
     <div class="leaderboard-header">Live Leaderboard</div>
@@ -326,13 +330,29 @@
 </script>
 <script>
   function showTab(tab) {
-  document.getElementById('entryTab').style.display = tab === 'entry' ? 'block' : 'none';
-  document.getElementById('leaderboardTab').style.display = tab === 'leaderboard' ? 'block' : 'none';
-  
-  if (tab === 'leaderboard' && !window.leaderboardLoaded) {
-    loadLeaderboard();
-    window.leaderboardLoaded = true;
-  }
+  const entryTab = document.getElementById('entryTab');
+  const leaderboardTab = document.getElementById('leaderboardTab');
+
+  entryTab.style.opacity = 0;
+  leaderboardTab.style.opacity = 0;
+
+  setTimeout(() => {
+    entryTab.style.display = tab === 'entry' ? 'block' : 'none';
+    leaderboardTab.style.display = tab === 'leaderboard' ? 'block' : 'none';
+
+    setTimeout(() => {
+      if (tab === 'entry') {
+        entryTab.style.opacity = 1;
+      } else {
+        leaderboardTab.style.opacity = 1;
+        if (!window.leaderboardLoaded) {
+          loadLeaderboard();
+          window.leaderboardLoaded = true;
+        }
+      }
+    }, 50);
+  }, 200);
+}
 }
   showTab('entry');
 </script>

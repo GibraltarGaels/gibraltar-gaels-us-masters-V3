@@ -80,6 +80,7 @@
     <span style="display:inline-block; width: 2rem;"></span>
     <button onclick="showTab('leaderboard')" style="margin: 0 1rem; padding: 0.5rem 1rem; font-size: 1rem; background-color: #c00000; color: white; border: none; border-radius: 5px; cursor: pointer;">Leaderboard</button>
   </nav>
+<div id="countdown" style="text-align:center; font-weight:bold; font-size:1.2rem; margin-bottom:1rem;"></div>
 
   <div id="entryTab">
 
@@ -363,7 +364,38 @@
     }, 50);
   }, 200);
 }
-showTab('entry');
+// Countdown control
+const deadline = new Date("April 11, 2025 14:00:00").getTime();
+const now = new Date().getTime();
+const entryOpen = now < deadline;
+
+const countdownEl = document.getElementById("countdown");
+function updateCountdown() {
+  const now = new Date().getTime();
+  const t = deadline - now;
+  if (t <= 0) {
+    countdownEl.innerHTML = "✅ Entries are now closed.";
+    document.getElementById("entryTab").style.display = "none";
+    document.querySelector("button[onclick=\"showTab('entry')\"]").style.display = "none";
+    showTab('leaderboard');
+    return;
+  }
+  const days = Math.floor(t / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((t % (1000 * 60)) / 1000);
+  countdownEl.innerHTML = `⏳ Entries close in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+if (entryOpen) {
+  showTab('entry');
+} else {
+  document.getElementById("entryTab").style.display = "none";
+  document.querySelector("button[onclick=\"showTab('entry')\"]").style.display = "none";
+  showTab('leaderboard');
+}
 </script>
 </body>
 </html>

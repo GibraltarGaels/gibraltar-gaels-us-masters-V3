@@ -365,7 +365,10 @@
   }, 200);
 }
 // Countdown control
-const deadline = new Date("April 11, 2025 14:00:00").getTime();
+const deadline = new Date(new Date().getTime() + 5 * 60 * 1000)"  // 5 minutes from now
+    }
+  ]
+}.getTime();
 const now = new Date().getTime();
 const entryOpen = now < deadline;
 
